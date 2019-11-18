@@ -1,0 +1,85 @@
+html,body
+{
+   font-size: 1em ;
+   color: lightBlue;
+    background-color: #121212;
+    margin: 10 auto;
+}
+
+.btn {
+    padding: 10px 16px;
+    cursor: pointer;
+}
+
+.active{
+    background-color: #ADD8E6 !important;
+    color: black !important;
+}
+
+.btn:hover {
+    background-color: #5190A5;
+    color: white;
+}
+
+.friendDiv{
+    border-style: solid;
+    border-color: lightBlue;
+    text-align:center;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.flex-friendDiv > div {
+
+  width: 100px;
+  margin: 10px;
+  text-align: center;
+  line-height: 75px;
+  font-size: 30px;
+
+}
+
+.selecedFriend{
+    width: 50%;
+    margin: 0 auto;
+}
+
+.show{
+    display: inline-block;
+}
+
+.hidden{
+    display: none;
+}
+
+.commonGamesDiv{
+    display: flex;
+    flex-wrap:  wrap ;
+}
+
+.game{
+    padding: 10px 16px;
+}
+
+.getRanGame{
+    padding: 30px;
+}
+
+.randomGame{
+     display: inline-block;
+     padding: 50px;
+}
+
+.sub{
+    text-align:center;
+    width: 100%;
+}
+
+.steamPlayerForm{
+    text-align:center;
+}
+
+.noCommon{
+    width: 50%;
+    margin: 0 auto;
+}

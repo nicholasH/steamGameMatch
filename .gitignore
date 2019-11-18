@@ -1,0 +1,8 @@
+
+setting_secret.py
+
+*.lnk
+
+__pycache__/
+
+.idea/
