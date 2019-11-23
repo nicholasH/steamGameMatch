@@ -154,6 +154,35 @@ function showCoOp(){
      }
 }
 
+function showRemotePlay(){
+
+    var header = document.getElementById("commonGamesDiv");
+    var games = header.getElementsByClassName("game");
+
+    for(var i = 0; i < games.length; i++){
+        var isCoOp = false
+
+        var meta = games[i].getElementsByClassName("GameMeta")
+        var ids = meta[0].getElementsByClassName("catID")
+
+            for(var x =  0;x < ids.length; x++){
+                id = ids[x]
+
+                //if not in list
+                if ('44' === id.textContent) {
+                    isCoOp = true
+                }
+            }
+
+        if(!isCoOp){
+            games[i].classList.remove("show");
+            games[i].classList.add("hidden");
+        }
+     }
+
+
+}
+
 function getMuti() {
     var header = document.getElementById("commonGamesDiv");
     var games = header.getElementsByClassName("game");
