@@ -6,3 +6,5 @@ setting_secret.py
 __pycache__/
 
 .idea/
+
+*.db

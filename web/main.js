@@ -43,16 +43,15 @@ async function populateFriends(){
 
 async function populateFriendsGames()
 {
-     console.log("populating Games");
+    console.log("populating common Games");
     var commonGamesDiv = document.getElementById("commonGamesDiv");
+    var remoteGameDiv = document.getElementById("remoteGameDiv");
+    var uniqueGameDiv = document.getElementById("uniqueGamesDiv");
     var selectFriends = document.getElementsByClassName("selectFriend");
 
-    var child = commonGamesDiv.lastElementChild;
-        while (child) {
-            commonGamesDiv.removeChild(child);
-            child = commonGamesDiv.lastElementChild;
-            }
-
+    clear(commonGamesDiv);
+    clear(remoteGameDiv);
+    clear(uniqueGameDiv);
 
     var selected = [];
 
@@ -73,9 +72,8 @@ async function populateFriendsGames()
         var gameDiv = document.createElement("div");
         gameDiv.className = "game show";
 
-
         var gameImg = document.createElement("img");
-        gameImg.src = game.header_image;
+        gameImg.src = game.image;
         gameImg.className = "img-responsive"
 
         var gameName = document.createElement("p");
@@ -108,6 +106,75 @@ async function populateFriendsGames()
         gameDiv.appendChild(metaDiv)
 
         commonGamesDiv.appendChild(gameDiv)
+    }
+
+    console.log("populating remote Games")
+
+    var games = await eel.getRemoteGames(selected)();
+    console.log(games);
+
+    for(var i =0; i < games.length; i++){
+        var game = games[i];
+        var gameDiv = document.createElement("div");
+        gameDiv.className = "remoteGame";
+
+        var gameImg = document.createElement("img");
+        gameImg.src = game.image;
+        gameImg.className = "img-responsive"
+
+        var gameName = document.createElement("p");
+        gameName.textContent = game.name;
+
+        gameDiv.appendChild(gameImg);
+        gameDiv.appendChild(gameName);
+
+        remoteGameDiv.appendChild(gameDiv)
+    }
+
+    console.log("populating unique games")
+    var gameList = await eel.getUniqueGames(selected)();
+    console.log(gameList);
+
+    for(var i =0; i < gameList.length; i++){
+        var player = gameList[i].steamID;
+        var games = gameList[i].games;
+
+        var uniqueGamesDiv = document.createElement("div");
+        uniqueGamesDiv.className = "player: "+player;
+
+        var playerheader = document.createElement("h3");
+        playerheader.innerText = player;
+        var line = document.createElement("hr");
+
+        uniqueGamesDiv.appendChild(playerheader);
+        uniqueGamesDiv.appendChild(line);
+
+        var playerGameDiv = document.createElement("div")
+        playerGameDiv.className = "playerGameDiv"
+
+         for(var j =0; j < games.length; j++){
+            var game = games[j];
+            var gameDiv = document.createElement("div");
+            gameDiv.className = "game unique";
+
+            var gameImg = document.createElement("img");
+            gameImg.src = game.image;
+            gameImg.className = "img-responsive"
+
+            var gameName = document.createElement("p");
+            gameName.textContent = game.name;
+
+            gameDiv.appendChild(gameImg);
+            gameDiv.appendChild(gameName);
+
+            playerGameDiv.appendChild(gameDiv)
+         }
+
+         uniqueGamesDiv.appendChild(playerGameDiv)
+
+
+
+        uniqueGameDiv.appendChild(uniqueGamesDiv)
     }
 
 }
@@ -236,5 +303,14 @@ function loading(form){
     form.submit.disabled = true;
     form.submit.innerHTML = "Please wait...";
   }
+
+async function clear(element){
+    var child = element.lastElementChild;
+        while (child) {
+            element.removeChild(child);
+            child = element.lastElementChild;
+            }
+
+}
 
 populateFriends()

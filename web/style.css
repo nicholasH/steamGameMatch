@@ -54,7 +54,22 @@ html,body
 
 .commonGamesDiv{
     display: flex;
-    flex-wrap:  wrap ;
+    flex-wrap:  wrap;
+}
+
+.remoteGameDiv{
+    display: flex;
+    flex-wrap:  wrap;
+}
+
+.uniqueGamesDiv{
+    display: flex;
+    flex-wrap:  wrap;
+}
+
+.playerGameDiv{
+    display: flex;
+    flex-wrap:  wrap;
 }
 
 .game{
