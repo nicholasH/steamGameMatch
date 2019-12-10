@@ -28,11 +28,15 @@ async function populateFriends(){
             input.className = "selectFriend";
             input.setAttribute("name","selectFriend");
             input.setAttribute("type","checkbox");
-            input.id = friendInfo.steamid;
             input.value = friendInfo.steamid;
 
-            btn.appendChild(img)
-            btn.appendChild(p)
+            var playerCard = document.createElement("DIV");
+
+            playerCard.id = friendInfo.steamid;
+            playerCard.appendChild(img)
+            playerCard.appendChild(p)
+
+            btn.appendChild(playerCard)
             btn.appendChild(input)
 
             friDiv[0].appendChild(btn);
@@ -59,7 +63,7 @@ async function populateFriendsGames()
     {
         if(selectFriends[i].checked)
         {
-            selected.push(selectFriends[i].id)
+            selected.push(selectFriends[i].value)
         }
     }
 
@@ -82,7 +86,6 @@ async function populateFriendsGames()
         var metaDiv = document.createElement("div");
         metaDiv.className = "GameMeta";
         metaDiv.setAttribute("style","display: none;")
-
 
         var cat = game.categories
 
@@ -142,11 +145,21 @@ async function populateFriendsGames()
         var uniqueGamesDiv = document.createElement("div");
         uniqueGamesDiv.className = "player: "+player;
 
-        var playerheader = document.createElement("h3");
-        playerheader.innerText = player;
+
+
         var line = document.createElement("hr");
 
-        uniqueGamesDiv.appendChild(playerheader);
+        var clonePlayerCard = document.getElementById(player);
+
+        if(clonePlayerCard == null){
+            var playerheader = document.createElement("h5");
+            playerheader.innerText = "YOU";
+            uniqueGamesDiv.appendChild(playerheader)
+        }
+        else{
+            uniqueGamesDiv.appendChild(clonePlayerCard.cloneNode(true));
+        }
+
         uniqueGamesDiv.appendChild(line);
 
         var playerGameDiv = document.createElement("div")
@@ -171,10 +184,7 @@ async function populateFriendsGames()
          }
 
          uniqueGamesDiv.appendChild(playerGameDiv)
-
-
-
-        uniqueGameDiv.appendChild(uniqueGamesDiv)
+         uniqueGameDiv.appendChild(uniqueGamesDiv)
     }
 
 }

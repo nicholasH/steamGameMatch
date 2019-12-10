@@ -367,7 +367,8 @@ def make_dict(list):
             returnDic["app_id"] = x[0]
             returnDic["name"] = x[1]
             returnDic["image"] = x[2]
-            returnDic["categories"] = pickle.loads(x[3])
+            cat =  pickle.loads(x[3]);
+            returnDic["categories"] = [] if (cat is None) else cat
 
             returnList.append(returnDic)
 
